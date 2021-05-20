@@ -9,7 +9,9 @@ type User = {
     id: string;
   };
 
-  data: { stripe_customer_id: string };
+  data: {
+    stripe_customer_id: string;
+  };
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -54,6 +56,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(200).json({ sessionId: stripeCheckoutSession.id });
   } else {
     res.setHeader("Allow", "POST");
-    res.status(405).end("Method not allowed");
+    res.status(405).send("Method not allowed");
   }
 };
